@@ -1,23 +1,21 @@
-import json
 from flask import Flask, jsonify, request, render_template, redirect
+import json
+from wtforms import Form
 from flask_cors import CORS
 from joblib import load
 		
 app = Flask(__name__)
 
-#CORS(app)
-
 tweet=""
-clf=load('algo.joblib')
+clf=load('filename.joblib')
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
     if request.method == "POST":
         tweet = request.form['tweet']
         return redirect(request.url+'results')
-    return render_template('home.html')
+    return render_template('index.html')
 
-# 0 - hate speech 1 - offensive language 2 - neither
 def return_probas():
   probas = clf.predict_proba([tweet.lower()]) 
   print(tweet)
@@ -30,7 +28,7 @@ def return_probas():
   return jsonify(probas_dict)
 
 
-@app.route('/results')
+@app.route('/result')
 def results():
     return render_template('results.html', tweet=tweet, probas=return_probas())
 		
