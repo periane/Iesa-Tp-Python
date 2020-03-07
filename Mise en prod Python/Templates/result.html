@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Result of search</title>
+  </head>
+  <body>
+    <h2>Your tweet : {{ tweet }}</h2>
+       <br>
+       <h3>Hate Speech : {{ probas['hate speech'] }} %</h3>
+       <h3>Offensive Language : {{ probas['offensive language'] }} %</h3>
+       <h3>Neither : {{ probas['neither'] }} %</h3>
+  </body>
+</html>
